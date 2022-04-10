@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气查询</title>
+    <style>
+        @font-face {
+            font-family: 'iconfont';
+            src: url('iconfont.woff2?t=1625017888287') format('woff2'),
+                url('iconfont.woff?t=1625017888287') format('woff'),
+                url('iconfont.ttf?t=1625017888287') format('truetype');
+        }
+
+        .iconfont {
+            font-family: "iconfont" !important;
+            font-size: 16px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* 清浮动 */
+        .clear::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background-color: #424242;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 750px;
+            height: 435px;
+            /* background-color: red; */
+            background-color: #222831;
+            border-radius: 25px;
+            box-shadow: 0 0 70px -10px rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+        }
+
+        .weather-side {
+            position: relative;
+            width: 300px;
+            height: 100%;
+            /* background-color: red; */
+            border-radius: 25px 0 0 25px;
+            box-shadow: 0 0 35px -10px rgba(0, 0, 0, 0.2);
+            float: left;
+        }
+
+        .gradient {
+            width: 100%;
+            height: 100%;
+            /* background-color: red; */
+            position: absolute;
+            background-image: linear-gradient(135deg, #72EDF1 10%, #5151E6 100%);
+            border-radius: 25px 0 0 25px;
+            opacity: 0.8;
+            position: absolute;
+        }
+
+        .date-container {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+        }
+
+        .date-container .date-day {
+            display: block;
+            margin-top: 4px;
+        }
+
+        #location {
+            display: block;
+            margin-top: 4px;
+        }
+
+        .weather-conteiner {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+        }
+
+        #weather-l {
+            font-size: 70px;
+        }
+
+        .weather-temp {
+            font-size: 4em;
+            font-weight: bold;
+        }
+
+        .waeather-desc {
+            font-size: 20px;
+        }
+
+
+        /* 右边部分 */
+        .info-side {
+            float: right;
+            /* background-color: red; */
+            padding-top: 25px;
+            margin-right: 10px;
+            height: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .today-info {
+            /* background-color: royalblue; */
+            padding: 15px 15px 0 15px;
+            margin: 0 25px 25px 25px;
+            box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+        }
+
+        .today-info div {
+            margin-bottom: 10px;
+        }
+
+        .today-info .title {
+            float: left;
+        }
+
+        .today-info .value {
+            float: right;
+        }
+
+
+        .week-list {
+            margin: 10px 35px;
+            border-radius: 10px;
+            box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        .week-list li {
+            float: left;
+            /* background-color: red; */
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 10px;
+            text-align: center;
+            transition: 200ms;
+            z-index: 100;
+        }
+
+        .week-list li span {
+            display: block;
+        }
+
+        .week-list .iconfont {
+            font-size: 36px;
+        }
+
+        .week-list li:hover {
+            transform: scale(1.1);
+            background-color: #ffffff;
+            color: #222831;
+        }
+
+        .active {
+            /* transform: scale(1.1); */
+            background-color: #ffffff;
+            color: #222831;
+        }
+
+        .week-list .day-name {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .week-list .day-temp {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .location-container {
+            padding: 25px 35px;
+            position: relative;
+            /* background-color: red; */
+            /* width: 320px;
+               height: 126px; */
+            /* z-index: -10; */
+        }
+
+        .location-container input {
+            outline: none;
+            width: 300px;
+            height: 28px;
+            padding: 6px;
+            display: block;
+            box-sizing: border-box;
+            /* font-weight: bold; */
+            position: absolute;
+            bottom: -135px;
+            /* top: 100px; */
+            left: calc(50% - 150px);
+            border: none;
+            color: #222831;
+            border-radius: 5px;
+        }
+
+        .location-container button {
+            outline: none;
+            width: 320px;
+            /* height: 35px; */
+            padding: 8px;
+            box-sizing: border-box;
+            border: none;
+            color: #ffffff;
+            background-image: linear-gradient(135deg, #72EDF1 10%, #5151E6 100%);
+            border-radius: 25px;
+            /* font-size: 18px; */
+            font-weight: bold;
+            box-shadow: 0 0 40px -5px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: 200ms;
+            position: absolute;
+            bottom: -195px;
+            left: calc(50% - 160px);
+        }
+
+        .location-container button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+    <script>
+        function weather(data) {
+            var dateDayname = document.getElementById("date-dayname");
+            var dateDay = document.getElementById("date-day");
+            var location = document.getElementById("location");
+            //天气图标
+            var weahterL = document.getElementById("weather-l");
+            var weatherTemp = document.getElementById("weather-temp");
+            var weatherDesc = document.getElementById("weather-desc");
+
+            dateDayname.innerHTML = data.weather[0].date.slice(0, 3);
+            dateDay.innerHTML = data.date;
+            location.innerHTML = data.city;
+
+            //这个图标等下封装一个函数，来判断用什么图标
+            weahterL.innerHTML = weatherIcon(1);
+            weatherTemp.innerHTML = data.weather[0].temp.slice(0, 3) + "℃";
+            weatherDesc.innerHTML = data.weather[0].weather;
+
+            var pm = document.getElementById("pm");
+            var humidity = document.getElementById("humidity")
+            var wind = document.getElementById("wind");
+
+            pm.innerHTML = data.pm25;
+            humidity.innerHTML = "暂无";
+            wind.innerHTML = data.weather[0].wind;
+
+            var day1 = document.getElementById("day1");
+            var span1 = day1.getElementsByTagName("span");
+
+            var day2 = document.getElementById("day2");
+            var span2 = day2.getElementsByTagName("span");
+
+            var day3 = document.getElementById("day3");
+            var span3 = day3.getElementsByTagName("span");
+
+            var day4 = document.getElementById("day4");
+            var span4 = day4.getElementsByTagName("span");
+
+            span1[0].innerHTML = weatherIcon(1);
+            span1[1].innerHTML = data.weather[0].date.slice(0, 3);
+            span1[2].innerHTML = data.weather[0].temp;
+
+            span2[0].innerHTML = weatherIcon(2);
+            span2[1].innerHTML = data.weather[1].date.slice(0, 3);
+            span2[2].innerHTML = data.weather[1].temp;
+
+            span3[0].innerHTML = weatherIcon(3);
+            span3[1].innerHTML = data.weather[2].date.slice(0, 3);
+            span3[2].innerHTML = data.weather[2].temp;
+
+            span4[0].innerHTML = weatherIcon(4);
+            span4[1].innerHTML = data.weather[3].date.slice(0, 3);
+            span4[2].innerHTML = data.weather[3].temp;
+
+            //封装一个判断天气，选择图标的函数
+            //参数t为第t天
+            function weatherIcon(t) {
+                if (data.weather[t - 1].icon1.search("yin") != -1) {
+                    return "&#xe624;";
+                }
+                if (data.weather[t - 1].icon1.search("duoyun") != -1) {
+                    return "&#xe618;";
+                }
+                if (data.weather[t - 1].icon1.search("qing") != -1) {
+                    return "&#xe61f;";
+                }
+                if (data.weather[t - 1].icon1.search("xiaoyu") != -1) {
+                    return "&#xe622;";
+                }
+                if (data.weather[t - 1].icon1.search("zhongyu") != -1) {
+                    return "&#xe685;";
+                }
+                if (data.weather[t - 1].icon1.search("dayu") != -1 || data.weather[0].icon1.search("baoyu") != -1) {
+                    return "&#xe644;";
+                }
+                if (data.weather[t - 1].icon1.search("zhenyu") != -1) {
+                    return "&#xe642;";
+                }
+            }
+
+
+
+
+
+
+
+        }
+
+        window.onload = function () {
+            var btn = document.getElementById("location-button");
+            var city = document.getElementById("city");
+            //默认查询北京天气
+            var script = document.createElement("script");
+            script.src = `https://api.asilu.com/weather/?city=${"北京"}&callback=weather`;
+            document.body.appendChild(script);
+            btn.onclick = function () {
+                // 加个简单判断，输入内容是否为空
+                if (city.value) {
+                    var script = document.createElement("script");
+                    script.src = `https://api.asilu.com/weather/?city=${city.value}&callback=weather`;
+                    //插入到页面中去
+                    document.body.appendChild(script);
+                } else {
+                    alert("请输入城市名称!");
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+
+        <!-- 左边部分 -->
+        <div class="weather-side">
+
+            <!-- 渐变 -->
+            <div class="gradient"></div>
+            <div class="date-container">
+                <h2 class="date-dayname" id="date-dayname">周二</h2>
+                <span class="date-day" id="date-day">2020-3-24</span>
+                <!-- location图标 -->
+                <span class="iconfont" id="location">&#xe60d;北京</span>
+            </div>
+
+            <div class="weather-conteiner">
+                <!-- 天气图标 -->
+                <span class="iconfont" id="weather-l">&#xe61f;</span>
+                <div class="weather-temp" id="weather-temp">25℃</div>
+                <div class="waeather-desc" id="weather-desc">晴天</div>
+            </div>
+        </div>
+
+        <!-- 右边部分 -->
+        <div class="info-side">
+            <div class="today-info-container">
+                <div class="today-info">
+                    <!-- PM2.5 -->
+                    <div class="pm clear">
+                        <span class="title">PM2.5</span>
+                        <span class="value" id="pm">00</span>
+                    </div>
+
+                    <!-- 湿度 -->
+                    <div class="humidity clear">
+                        <span class="title">湿度</span>
+                        <span class="value" id="humidity">00</span>
+                    </div>
+
+                    <!-- 风速 -->
+                    <div class="wind clear">
+                        <span class="title">风速</span>
+                        <span class="value" id="wind">00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="week-container">
+                <ul class="week-list">
+                    <li class="active" id="day1">
+                        <!-- 天气图标 -->
+                        <span class="iconfont">&#xe61f;</span>
+                        <span class="day-name">星期二</span>
+                        <span class="day-temp">25℃</span>
+                    </li>
+
+                    <li id="day2">
+                        <!-- 天气图标 -->
+                        <span class="iconfont">&#xe61f;</span>
+                        <span class="day-name">星期三</span>
+                        <span class="day-temp">25℃</span>
+                    </li>
+
+                    <li id="day3">
+                        <!-- 天气图标 -->
+                        <span class="iconfont">&#xe61f;</span>
+                        <span class="day-name">星期四</span>
+                        <span class="day-temp">25℃</span>
+                    </li>
+
+                    <li id="day4">
+                        <!-- 天气图标 -->
+                        <span class="iconfont">&#xe61f;</span>
+                        <span class="day-name">星期五</span>
+                        <span class="day-temp">25℃</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="location-container">
+                <input type="text" placeholder="位置" id="city">
+                <button class="location-button" id="location-button">
+                    <!-- location图标 -->
+                    <span class="iconfont">&#xe60d;查询</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

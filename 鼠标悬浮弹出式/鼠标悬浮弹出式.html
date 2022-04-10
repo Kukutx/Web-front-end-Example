@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 1000px;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700');
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #333;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        ul li {
+            position: relative;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: #777;
+            margin: 0 20px;
+            border-radius: 50%;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        ul li:hover {
+            background: #86ff3b;
+            box-shadow: 0 0 0 4px #333, 0 0 0 6px #86ff3b;
+        }
+
+        ul li .content {
+            position: absolute;
+            bottom: 55px;
+            width: 400px;
+            background: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.5s;
+            transform: translateX(-50%) translateY(-50px);
+        }
+
+        ul li .content::before {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #fff;
+            bottom: -15px;
+            left: 194px;
+            transform: rotate(45deg);
+        }
+
+        ul li:hover .content {
+            visibility: visible;
+            opacity: 1;
+            transition: 0.5s;
+            transform: translateX(-50%) translateY(0px);
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <div class="content">
+                <h2>一人走易，众人走难</h2>
+                <p>
+                    写作难？没人监督？刚刚开始码字的开发者朋友们经常对吐露心声，
+                    好羡慕那些把写作当作副业的大佬们可以轻易赚到money，得到老板的赏识……
+
+                    作者：掘金酱
+                    链接：https://juejin.cn/post/6915026777286901767/
+                    来源：掘金
+                    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="content">
+                <h2>一人走易，众人走难</h2>
+                <p>
+                    写作难？没人监督？刚刚开始码字的开发者朋友们经常对吐露心声，
+                    好羡慕那些把写作当作副业的大佬们可以轻易赚到money，得到老板的赏识……
+
+                    作者：掘金酱
+                    链接：https://juejin.cn/post/6915026777286901767/
+                    来源：掘金
+                    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="content">
+                <h2>一人走易，众人走难</h2>
+                <p>
+                    写作难？没人监督？刚刚开始码字的开发者朋友们经常对吐露心声，
+                    好羡慕那些把写作当作副业的大佬们可以轻易赚到money，得到老板的赏识……
+
+                    作者：掘金酱
+                    链接：https://juejin.cn/post/6915026777286901767/
+                    来源：掘金
+                    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+                </p>
+            </div>
+        </li>
+    </ul>
+</body>
+
+</html>

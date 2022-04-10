@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        } 
+
+        body{
+            background: #333;
+        }  
+
+        .main{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+
+        #search {
+            font-size: 40px;
+            width: 100px;
+            height: 100px;
+            background: transparent;
+            border: 5px solid white;
+            border-radius: 50%;
+            padding: 10px;
+            color: white;
+            outline: none;
+            box-shadow: 0 0 10px #1e90ff,
+                        0 0 20px #1e90ff,
+                        inset 0 0 10px #1e90ff,
+                        inset 0 0 20px #1e90ff;
+            transition: .5s linear;
+        }
+
+        #search::placeholder{
+            color: transparent;
+            transition: .5s linear .5s;
+        }
+
+        #search:focus{
+            width: 600px;
+            border-radius: 10px;
+            box-shadow: none;
+            border: 5px solid #1e90ff;
+        }
+        
+        #search:focus::placeholder{
+            color: #a4b0be;
+            filter: blur(2px);
+        }
+
+        .main .bar{
+            width: 5px;
+            height: 60px;
+            background: white;
+            position: absolute;
+            transform: rotate(-45deg);
+            top: 75%;
+            left: 100%;
+            box-shadow: 0 0 10px #1e90ff,0 0 20px #1e90ff;
+            transition: .5s linear;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <input type="text" id="search" placeholder="PRESS ENTER TO SEARCH">
+        <span class="bar"></span>
+    </div>
+
+</body>
+</html>
+<script>
+    var search=document.getElementById("search");
+    var bar=document.getElementsByClassName("bar")[0];
+    search.onfocus=()=>{
+        bar.style.height="0";
+    }
+    search.onblur=()=>{
+        bar.style.height="60px";
+        search.value="";
+    }
+</script>

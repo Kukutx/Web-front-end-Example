@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        html,
+        body {
+            display: grid;
+            height: 100%;
+            place-items: center;
+        }
+
+        textarea {
+            padding: 10px;
+            font-size: 17px;
+            resize: none;
+            text-align: justify;
+            color: #202020;
+        }
+
+        textarea:focus {
+            outline-color: #16a085;
+            border-color: #16a085;
+        }
+
+        .btn {
+            margin: 5px 0 40px 0;
+        }
+
+        .btn button {
+            padding: 9px 15px;
+            font-size: 17px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            outline: none;
+            color: #f2f2f2;
+            font-weight: 500;
+            border-radius: 3px;
+            cursor: pointer;
+            background: linear-gradient(#16a0b5, #16a085);
+        }
+
+        .btn .tooltip{
+            position: relative;
+            margin-left: -10px;
+            font-size: 17px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            border-radius: 3px;
+            color: #f2f2f2;
+            z-index: -1;
+            background: linear-gradient(#16a0b5, #16a085);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .4s,margin-left .4s;
+        }
+
+        .btn .tooltip.show{
+            margin-left: 10px;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .tooltip::before{
+            content: '';
+            position: absolute;
+            height: 15px;
+            width: 15px;
+            background: linear-gradient(#16a0b5, #16a085);
+            top: 50%;
+            left: -5px;
+            z-index: -1;
+            transform: translateY(-50%) rotate(45deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <textarea id="copyText" cols="60"
+            rows="5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni voluptatem nisi, non nostrum asperiores error nam harum a autem incidunt dolores ad quae ratione aut et repellat modi vitae commodi!</textarea>
+        <div class="btn"><button>copy in clipboard</button><span class="tooltip">copied</span></div>
+        <textarea id="pasteText" cols="60" rows="5" placeholder="Paste your copied content here..."></textarea>
+    </div>
+    <script>
+        const copyText = document.querySelector("#copyText");
+        const pasteText = document.querySelector("#pasteText");
+        const button = document.querySelector("button");
+        const tooltip = document.querySelector(".tooltip");
+        button.addEventListener('click', function () {
+            copyText.select();
+            pasteText.value = "";
+            if (document.execCommand("copy")) {
+                pasteText.focus();
+                tooltip.classList.add("show");
+                setTimeout(function () {
+                    tooltip.classList.remove("show");
+                },700);
+            }else{
+                alert("Something went wrong!");
+            }
+        });
+    </script>
+</body>
+
+</html>

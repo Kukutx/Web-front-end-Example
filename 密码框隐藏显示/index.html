@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height: 100vh;
+            background-image: linear-gradient(120deg,#fccb90,#d57eed 100%);
+        }
+        .login{
+            position: relative;
+            width: 400px;
+            height: 40px;
+            margin: 300px auto;
+        }
+        input{
+            width: 400px;
+            height: 40px;
+            border: 0;
+            background-color: transparent;
+            outline: none;
+            border-bottom: 2px solid #fff;
+            font-size: 20px;
+        }
+        label img{
+            position: absolute;
+            top: 5px;
+            right: 0px;
+            width: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <label for="">
+            <img id="test" src="1.png" alt="">
+        </label>
+        <input type="password" id="psw">
+    </div>
+    <script>
+        var test=document.getElementById('test');
+        var psw=document.getElementById('psw');
+        var flag=0;
+        test.onclick=()=>{
+            if(flag==0){
+                psw.type="text";
+                test.src= "2.png"
+                flag = !flag;
+            }else{
+                psw.type="password";
+                test.src= "1.png";
+                flag = !flag;
+            }
+        }
+
+    </script>
+</body>
+</html>

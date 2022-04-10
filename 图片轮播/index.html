@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .content {
+            height: 400px;
+            width: 750px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .content .images {
+            height: 100%;
+            width: 100%;
+        }
+
+        .images img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .btm-sliders {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            display: flex;
+            transform: translateX(-50%);
+        }
+
+        .btm-sliders span {
+            height: 15px;
+            width: 50px;
+            border: 2px solid white;
+            margin: 0 3px;
+            cursor: pointer;
+        }
+
+        .content .slide {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            border: 2px solid white;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .content .slide:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .slide span {
+            font-size: 35px;
+            color: white;
+            line-height: 41px;
+        }
+
+        .content .right {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="images">
+            <img src="./img/1.jpg" alt="">
+            <img src="./img/2.jpg" alt="">
+            <img src="./img/3.jpg" alt="">
+            <img src="./img/4.jpg" alt="">
+        </div>
+        <div onclick="side_slide(-1)" class="slide left">
+            <span class="fa fa-angle-left"></span>
+        </div>
+        <div onclick="side_slide(1)" class="slide right">
+            <span class="fa fa-angle-right"></span>
+        </div>
+        <div class="btm-sliders">
+            <span onclick="btm_slide(1)"></span>
+            <span onclick="btm_slide(2)"></span>
+            <span onclick="btm_slide(3)"></span>
+            <span onclick="btm_slide(4)"></span>
+        </div>
+    </div>
+    <script>
+        var indexValue = 1;
+        showImg(indexValue);
+        function btm_slide(e) { showImg(indexValue = e); }
+        function side_slide(e) { showImg(indexValue += e); }
+        function showImg(e) {
+            var i;
+            const img = document.querySelectorAll('img');
+            const sliders = document.querySelectorAll('.btm-sliders span');
+            if (e > img.length) { indexValue = 1; }
+            if (e < 1) { indexValue = img.length; }
+            for (i = 0; i < img.length; i++) {
+                img[i].style.display = "none";
+            }
+            for (i = 0; i < sliders.length; i++) {
+                sliders[i].style.background = "rgba(255, 255, 255, 0.1)";
+            }
+            img[indexValue - 1].style.display = "block";
+            sliders[indexValue - 1].style.background = "white";
+        }
+
+    </script>
+</body>
+</html>

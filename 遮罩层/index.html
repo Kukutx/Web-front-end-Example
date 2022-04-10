@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .box{
+            position: relative;
+            width: 600px;
+            height: 375px;
+            background: url("1.jpg");
+            background-size: contain;
+            overflow: hidden;
+        }
+        .box::before{
+            content: "Re0 : 雷姆";
+            position: absolute;
+            top: -375px;
+            left: 0;
+            width: 600px;
+            height: 375px;
+            line-height: 375px;
+            text-align: center;
+            font-size: 30px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        .box:hover::before{
+            top: 0;
+            animation: dropdown 2s;
+        }
+        @keyframes dropdown{
+            0%{
+                top: -375px;
+            }
+            5%{
+                top: 0;
+            }
+            10%{
+                top: -30px;
+            }
+            20%{
+                top: 0;
+            }
+            30%{
+                top: -20px;
+            }
+            40%{
+                top: 0;
+            }
+            50%{
+                top: -15px;
+            }
+            60%{
+                top: 0;
+            }
+            70%{
+                top: -10px;
+            }
+            80%{
+                top: 0;
+            }
+            90%{
+                top: -5px;
+            }
+            80%{
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>

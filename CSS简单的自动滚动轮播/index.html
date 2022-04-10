@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #banner{
+            overflow: hidden;
+        }
+
+        #banner,ul>li,ul>li img{
+            width: 1000px;
+            height: 600px;
+
+        }
+
+        .re{
+            position: relative;
+            width: calc(1000px * 5);
+            animation: re 10s linear infinite;
+        }
+
+        ul>li{
+            float: left;
+        }
+
+        @keyframes re {
+            0%{
+                left: calc(1000px * 0);
+            }
+
+
+            /*10% 让他不变*/
+            15%{
+                left: calc(1000px * -1);
+            }
+
+            25%{
+                left: calc(1000px * -1);
+            }
+
+
+            40%{
+                left: calc(1000px * -2);
+            }
+
+            50%{
+                left: calc(1000px * -2);
+            }
+
+            65%{
+                left: calc(1000px * -3);
+            }
+
+            75%{
+                left: calc(1000px * -3);
+            }
+
+            90%{
+                left: calc(1000px * -4);
+            }
+
+            100%{
+                left: calc(1000px * -4);
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="banner">
+        <div class="re">
+            <ul>
+                <li><img src="img/1.jpg" alt=""></li>
+                <li><img src="img/2.jpg" alt=""></li>
+                <li><img src="img/3.jpg" alt=""></li>
+                <li><img src="img/4.jpg" alt=""></li>
+                <!-- 把第一张复制到最后 -->
+                <li><img src="img/1.jpg" alt=""></li>
+            </ul>
+        </div>
+    </div>
+   
+</body>
+</html>

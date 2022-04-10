@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>jquery3.4.1轮播图插件 www.bootstrapmb.com</title>
+        <script src="js/jquery-3.4.1.min.js"></script>
+		<script src="js/lbt.js"></script>
+		<style>
+			body{background-color: #1D1D1D}
+			/* 目标容器的一些样式,这个随意，反正自行填充满的 */
+			#divs2 {
+	height: 400px;
+	width: 800px;
+	border: 1px solid hsla(0,0%,100%,0.27);
+	border-radius: 5px;
+	margin-right: auto;
+	margin-left: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="divs2"></div>
+	</body>
+</html>
+<script>
+	//调用
+	var imgs = ["imgs/t1.png", "imgs/t2.png", "imgs/t3.png", "imgs/t4.png"]
+	var hrefs = ["http://www.bootstrapmb.com/", "#2", "#3", "#4"]
+	var lbt = lbimg("divs2", imgs,hrefs,3000).start()
+</script>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        .navbar {
+            position: relative;
+            width: 100vm;
+        }
+
+        .navbar input {
+            display: none;
+        }
+
+        .navbar label {
+            position: absolute;
+            top: 0;
+            left: 70px;
+            width: 100%;
+            height: 43px;
+            padding-left: 20px;
+            font-size: 30px;
+            color: #5a738e;
+            background-color: #ededed;
+            border: 1px solid #d9dee4;
+            cursor: pointer;
+            transition: all 0.5s;
+        }
+
+        .navbar ul {
+            overflow: hidden;
+            list-style: none;
+            width: 70px;
+            height: 100vh;
+            background-color: #2a3f54;
+            transition: all 0.5s;
+        }
+
+        .navbar ul li {
+            height: 70px;
+            margin-bottom: 10px;
+        }
+
+        .navbar ul li:first-child {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .navbar ul li:first-child img {
+            width: 50px;
+            border-radius: 50%;
+        }
+
+        .navbar ul li:first-child span {
+            display: none;
+            color: #fff;
+            /*文字禁止换行*/
+            white-space: nowrap;
+            padding-left: 10px;
+        }
+
+        .navbar ul li a {
+            /* 弹性布局 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* 这个属性能改变弹性盒子的主轴方向，现在主轴方向向下，元素也就垂直排列 */
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            color: #d1d1d1;
+            text-decoration: none;
+        }
+
+        .navbar ul li a i {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .navbar ul li a span {
+            font-size: 10px;
+            white-space: nowrap;
+        }
+
+        .navbar ul li a:hover {
+            color: #fff;
+            background-color: #35495d;
+        }
+
+        .navbar input:checked+label {
+            left: 200px;
+        }
+
+        .navbar input:checked~ul {
+            width: 200px;
+        }
+
+        .navbar input:checked~ul li:first-child {
+            /* 改变弹性 */
+            justify-content: flex-start;
+        }
+
+        .navbar input:checked~ul li:first-child span {
+            display: block;
+        }
+
+        .navbar input:checked~ul li a {
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+
+        .navbar input:checked~ul li a i {
+            font-size: 18px;
+            margin: 0 15px;
+        }
+
+        .navbar input:checked~ul li a span {
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <input type="checkbox" id="checkbox">
+        <!-- 复选框的id属性和label的for属性必须相同，才能通过点击label选中复选框 -->
+        <label for="checkbox">
+            <i class="fa fa-bars"></i></label>
+        <ul>
+            <li>
+                <img src="1.jpg" alt="">
+                <span>欢迎您！ 管理员</span>
+            </li>
+            <li>
+                <a href="javascript:void(0)"><i class="fa fa-home"></i>
+                    <span> 后台首页</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)"><i class="fa fa-sitemap"></i>
+                    <span> 商品列表</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)"><i class="fa fa-user"></i>
+                    <span>用户列表</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)"><i class="fa fa-shopping-cart"></i>
+                    <span>订单列表</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)"><i class="fab fa-windows"></i>
+                    <span>功能列表</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <script>
+        //页面加载事件 等页面渲染完毕在执行js
+        window.addEventListener("load", () => {
+            //在获取整个list和file这个框
+            let list = document.querySelector(".list");
+            let file = document.querySelector(".file");
+
+
+            // 先获取上传图片元素
+            let uploadFile = document.querySelector("#file");
+            //为这个按钮添加change事件 当你选中图片点击确定时触发
+            uploadFile.addEventListener("change", function () {
+                // this.files是获取到的数据 ，一个类数组对象，所以我们只能用普通for循环 或者for of自行选择即可
+                for (let item of this.files) {
+                    //动态生成一个dom节点li;
+                    let li = document.createElement("li");
+                    //然后给li添加内容
+                    //上传的文件名称保存在没一项name中
+                    li.innerHTML = `
+                    <div class="close">x</div>
+                    <img src="img/${item.name}" />
+                    `;
+                    //每次生成一个li节点将添加到file这个元素之前
+                    list.insertBefore(li, file);   //insertBefore是将一个元素添加到参数的之前
+                }
+            });
+            //删除功能
+            list.addEventListener('click', (e) => {
+                // e是页面一开启就自动生成的事件对象
+                // e.target是触发事件的对象，nodeName是每一个dom元素都有的节点，且都是大写
+                //如果点击x就删除，否在不删除
+                if (e.target.nodeName == "DIV") {
+                    //removeChild 移出子节点
+                    list.removeChild(e.target.parentNode);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>上传图片</h2>
+        <ul class="list">
+            <li>
+                <div class="close">x</div>
+                <img src="img/0.jpg" />
+            </li>
+            <li class="file">
+                <!-- multiple这个属性可以实现文件选择框多选项 -->
+                <input type="file" name="file" id="file" multiple />
+            </li>
+        </ul>
+    </div>
+
+</body>
+
+</html>
